@@ -29,8 +29,13 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
         io.emit('message','A user has left the chat')
     })
+
+    //listen for chatMessage
+    socket.on('chatMessage', (msg) => {
+        io.emit('message', msg)
+    })
 })
 
-const PORT = 5000 || process.env.PORT
+const PORT = process.env.PORT || 5000
 
 server.listen(PORT, () => console.log(`Server is running on ${PORT}`));
